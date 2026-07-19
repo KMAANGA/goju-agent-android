@@ -40,6 +40,7 @@ dependencies {
 
     implementation(libs.sqlcipher.android)
     implementation(libs.sqlite.ktx)
+    implementation(libs.androidx.sqlite)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

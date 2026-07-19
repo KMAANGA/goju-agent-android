@@ -55,9 +55,11 @@ class DefaultAuthRepository @Inject constructor(
                 ?: return AppResult.Error(mapMessage(response.message))
 
             securePrefs.deviceApprovalStatus = body.deviceStatus
-            if (body.deviceStatus == "approved" && body.apiToken != null && body.agent != null) {
-                persistSession(body.apiToken, body.agent)
-                AppResult.Success(LoginOutcome.Approved(body.agent.toDomain()))
+            val token = body.apiToken
+            val agent = body.agent
+            if (body.deviceStatus == "approved" && token != null && agent != null) {
+                persistSession(token, agent)
+                AppResult.Success(LoginOutcome.Approved(agent.toDomain()))
             } else {
                 AppResult.Success(LoginOutcome.PendingApproval(deviceIdentifier.stableDeviceId()))
             }
@@ -67,9 +69,11 @@ class DefaultAuthRepository @Inject constructor(
         val response = api.deviceStatus(deviceIdentifier.stableDeviceId())
         val body = response.data ?: return AppResult.Error(mapMessage(response.message))
         securePrefs.deviceApprovalStatus = body.deviceStatus
-        if (body.deviceStatus == "approved" && body.apiToken != null && body.agent != null) {
-            persistSession(body.apiToken, body.agent)
-            AppResult.Success(LoginOutcome.Approved(body.agent.toDomain()))
+        val token = body.apiToken
+        val agent = body.agent
+        if (body.deviceStatus == "approved" && token != null && agent != null) {
+            persistSession(token, agent)
+            AppResult.Success(LoginOutcome.Approved(agent.toDomain()))
         } else {
             AppResult.Success(LoginOutcome.PendingApproval(deviceIdentifier.stableDeviceId()))
         }

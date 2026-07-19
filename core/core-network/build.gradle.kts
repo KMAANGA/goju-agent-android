@@ -29,7 +29,10 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.coroutines.android)
 
-    implementation(libs.retrofit.core)
+    // api, not implementation: consumers (feature-auth, feature-sync) catch
+    // retrofit2.HttpException directly for error handling, so the Retrofit type surface
+    // needs to leak through this module's own consumers' classpaths.
+    api(libs.retrofit.core)
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp.core)
     implementation(libs.okhttp.logging)

@@ -13,8 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import net.sqlcipher.database.SQLiteDatabase
-import net.sqlcipher.database.SupportFactory
+import net.zetetic.database.sqlcipher.SupportOpenHelperFactory
 import javax.inject.Singleton
 
 @Module
@@ -28,10 +27,12 @@ object DatabaseModule {
         passphraseProvider: DatabasePassphraseProvider,
     ): GojuAgentDatabase {
         // Loads the SQLCipher native library once per process before any DB is opened.
-        SQLiteDatabase.loadLibs(context)
+        System.loadLibrary("sqlcipher")
 
-        val passphrase = SQLiteDatabase.getBytes(passphraseProvider.getOrCreatePassphrase())
-        val factory = SupportFactory(passphrase)
+        // The passphrase is a random hex string (see DatabasePassphraseProvider) — its own
+        // UTF-8 bytes are the key material, no separate hex-decode step needed.
+        val passphrase = String(passphraseProvider.getOrCreatePassphrase()).toByteArray(Charsets.UTF_8)
+        val factory = SupportOpenHelperFactory(passphrase)
 
         return Room.databaseBuilder(context, GojuAgentDatabase::class.java, GojuAgentDatabase.DATABASE_NAME)
             .openHelperFactory(factory)
