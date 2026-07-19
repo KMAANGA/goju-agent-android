@@ -6,7 +6,25 @@ compiler in the loop, so expect to fix a handful of small build errors (missing 
 typo, a version mismatch) on the first sync/build. That's normal for a first compile of a
 project this size, not a sign the architecture is wrong.
 
-## 1. Prerequisites
+## 0. Fastest path: let GitHub Actions build the APK for you
+
+No local Android Studio/JDK setup needed. Go to the repo's **Actions** tab →
+**Build Debug APK** → **Run workflow** → wait a few minutes → download the
+`goju-agent-development-debug` artifact from the finished run and install it on a device
+(`adb install` or transfer the file and open it — enable "install unknown apps" for
+whatever app you use to open it). A separate `unit-tests` job in the same run reports the
+JVM unit test results without blocking the APK.
+
+This is CI building against the `development` flavor, which points at
+`https://dev.gojucloud.maangatech.com/` — see §3 below for pointing it at your own backend
+instead (requires editing `app/build.gradle.kts` and re-pushing, since CI builds from
+whatever's on `main`).
+
+If this is your first time compiling this project, expect the very first Actions run to
+surface small build errors (missing import, a version mismatch) — the project was written
+without a compiler in the loop. Report the error log back and they're quick to fix.
+
+## 1. Prerequisites (if building locally in Android Studio instead)
 
 - **Android Studio** (Ladybug/2024.2 or newer) — bundles its own JDK 17, so you don't need
   to install Java separately.
