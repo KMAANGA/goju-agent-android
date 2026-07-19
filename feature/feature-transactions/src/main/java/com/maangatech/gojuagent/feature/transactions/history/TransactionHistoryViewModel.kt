@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.maangatech.gojuagent.core.database.entity.TransactionEntity
 import com.maangatech.gojuagent.core.database.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 data class HistoryUiState(val query: String = "", val transactions: List<TransactionEntity> = emptyList())
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class TransactionHistoryViewModel @Inject constructor(
     transactionRepository: TransactionRepository,

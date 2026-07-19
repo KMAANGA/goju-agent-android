@@ -71,7 +71,7 @@ private fun TransactionRow(transaction: TransactionEntity, onClick: () -> Unit) 
     )
 }
 
-private fun TransactionStatus.toTone(): StatusTone = when (this) {
+internal fun TransactionStatus.toTone(): StatusTone = when (this) {
     TransactionStatus.SUCCESS -> StatusTone.SUCCESS
     TransactionStatus.PENDING, TransactionStatus.IN_PROGRESS -> StatusTone.PENDING
     TransactionStatus.FAILED -> StatusTone.FAILED

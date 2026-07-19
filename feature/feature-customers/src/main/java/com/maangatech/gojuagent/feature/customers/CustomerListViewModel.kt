@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.maangatech.gojuagent.core.database.entity.CustomerEntity
 import com.maangatech.gojuagent.core.database.repository.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -24,6 +25,7 @@ data class CustomerListUiState(
     val customers: List<CustomerEntity> = emptyList(),
 )
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CustomerListViewModel @Inject constructor(
     private val customerRepository: CustomerRepository,
