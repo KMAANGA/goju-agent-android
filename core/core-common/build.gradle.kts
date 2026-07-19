@@ -24,8 +24,14 @@ android {
 
 dependencies {
     implementation(libs.core.ktx)
-    implementation(libs.coroutines.android)
-    implementation(libs.moshi.kotlin)
+    // api, not implementation: GojuAgentApplication (:app) directly injects a
+    // @ApplicationScope CoroutineScope field, so kotlinx.coroutines types need to be
+    // visible there too, not just inside this module.
+    api(libs.coroutines.android)
+    // api, not implementation: MoshiModule provides the shared Moshi singleton for the
+    // whole app (see WorkflowSeeder in :app, which injects Moshi directly), so the type
+    // itself needs to be visible on every module that transitively depends on core-common.
+    api(libs.moshi.kotlin)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
