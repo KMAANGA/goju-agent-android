@@ -1,0 +1,197 @@
+[
+  {
+    "provider_code": "MPESA",
+    "provider_name": "M-Pesa",
+    "service_type": "withdraw",
+    "version": 1,
+    "dial_code": "*150*00#",
+    "timeout_seconds": 90,
+    "steps": [
+      {
+        "id": "main_menu",
+        "match_pattern": "(?i)(chagua|select).*(huduma|service)",
+        "input_source": "LITERAL",
+        "literal_value": "1",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_customer_number",
+        "match_pattern": "(?i)(namba|number).*(mteja|customer)",
+        "input_source": "FORM_FIELD",
+        "input_field_key": "customer_msisdn",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_amount",
+        "match_pattern": "(?i)(kiasi|amount)",
+        "input_source": "FORM_FIELD",
+        "input_field_key": "amount",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_pin",
+        "match_pattern": "(?i)(weka|enter).*(pin|nambari ya siri)",
+        "input_source": "SECURE_PROMPT",
+        "prompt_label": "Enter your M-Pesa PIN",
+        "is_terminal": false
+      },
+      {
+        "id": "success",
+        "match_pattern": "(?i)(umefanikiwa|imefanikiwa|successful).*(muamala|transaction)?.*(id|namba)[:\\s]*([A-Z0-9]{6,15})",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "SUCCESS",
+        "reference_capture_group": 4
+      },
+      {
+        "id": "failure",
+        "match_pattern": "(?i)(samahani|imeshindikana|imekataliwa|failed|error)[:\\s]*(.*)",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "FAILURE",
+        "failure_capture_group": 2
+      }
+    ]
+  },
+  {
+    "provider_code": "MPESA",
+    "provider_name": "M-Pesa",
+    "service_type": "deposit",
+    "version": 1,
+    "dial_code": "*150*00#",
+    "timeout_seconds": 90,
+    "steps": [
+      {
+        "id": "main_menu",
+        "match_pattern": "(?i)(chagua|select).*(huduma|service)",
+        "input_source": "LITERAL",
+        "literal_value": "2",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_customer_number",
+        "match_pattern": "(?i)(namba|number).*(mteja|customer)",
+        "input_source": "FORM_FIELD",
+        "input_field_key": "customer_msisdn",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_amount",
+        "match_pattern": "(?i)(kiasi|amount)",
+        "input_source": "FORM_FIELD",
+        "input_field_key": "amount",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_pin",
+        "match_pattern": "(?i)(weka|enter).*(pin|nambari ya siri)",
+        "input_source": "SECURE_PROMPT",
+        "prompt_label": "Enter your M-Pesa PIN",
+        "is_terminal": false
+      },
+      {
+        "id": "success",
+        "match_pattern": "(?i)(umefanikiwa|imefanikiwa|successful).*(id|namba)[:\\s]*([A-Z0-9]{6,15})",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "SUCCESS",
+        "reference_capture_group": 3
+      },
+      {
+        "id": "failure",
+        "match_pattern": "(?i)(samahani|imeshindikana|imekataliwa|failed|error)[:\\s]*(.*)",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "FAILURE",
+        "failure_capture_group": 2
+      }
+    ]
+  },
+  {
+    "provider_code": "MPESA",
+    "provider_name": "M-Pesa",
+    "service_type": "float_purchase",
+    "version": 1,
+    "dial_code": "*150*00#",
+    "timeout_seconds": 90,
+    "steps": [
+      {
+        "id": "main_menu",
+        "match_pattern": "(?i)(chagua|select).*(huduma|service)",
+        "input_source": "LITERAL",
+        "literal_value": "3",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_amount",
+        "match_pattern": "(?i)(kiasi|amount)",
+        "input_source": "FORM_FIELD",
+        "input_field_key": "amount",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_pin",
+        "match_pattern": "(?i)(weka|enter).*(pin|nambari ya siri)",
+        "input_source": "SECURE_PROMPT",
+        "prompt_label": "Enter your M-Pesa PIN",
+        "is_terminal": false
+      },
+      {
+        "id": "success",
+        "match_pattern": "(?i)(umefanikiwa|imefanikiwa|successful).*(id|namba)[:\\s]*([A-Z0-9]{6,15})",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "SUCCESS",
+        "reference_capture_group": 3
+      },
+      {
+        "id": "failure",
+        "match_pattern": "(?i)(samahani|imeshindikana|imekataliwa|failed|error)[:\\s]*(.*)",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "FAILURE",
+        "failure_capture_group": 2
+      }
+    ]
+  },
+  {
+    "provider_code": "MPESA",
+    "provider_name": "M-Pesa",
+    "service_type": "balance_inquiry",
+    "version": 1,
+    "dial_code": "*150*00#",
+    "timeout_seconds": 60,
+    "steps": [
+      {
+        "id": "main_menu",
+        "match_pattern": "(?i)(chagua|select).*(huduma|service)",
+        "input_source": "LITERAL",
+        "literal_value": "4",
+        "is_terminal": false
+      },
+      {
+        "id": "enter_pin",
+        "match_pattern": "(?i)(weka|enter).*(pin|nambari ya siri)",
+        "input_source": "SECURE_PROMPT",
+        "prompt_label": "Enter your M-Pesa PIN",
+        "is_terminal": false
+      },
+      {
+        "id": "success",
+        "match_pattern": "(?i)(salio|balance)[:\\s]*([A-Z]{3}\\s?[0-9,]+)",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "SUCCESS",
+        "reference_capture_group": 2
+      },
+      {
+        "id": "failure",
+        "match_pattern": "(?i)(samahani|imeshindikana|failed|error)[:\\s]*(.*)",
+        "input_source": "NONE",
+        "is_terminal": true,
+        "terminal_outcome": "FAILURE",
+        "failure_capture_group": 2
+      }
+    ]
+  }
+]

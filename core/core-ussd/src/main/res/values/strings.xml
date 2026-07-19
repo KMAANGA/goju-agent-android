@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ussd_accessibility_service_label">GOJU Agent — USSD Automation</string>
+    <string name="ussd_accessibility_service_description">Lets GOJU Agent read and respond to the USSD confirmation screens shown after starting a mobile-money/agency-banking transaction, so you don\'t have to type each menu step by hand. It only acts while you\'re running a transaction inside GOJU Agent — it never reads other apps, calls, or messages.</string>
+</resources>

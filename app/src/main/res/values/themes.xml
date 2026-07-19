@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Only used for the Activity window background / system chrome before Compose takes
+        over — all real theming (colors, typography, dark mode) lives in
+        core-designsystem's GojuAgentTheme Composable, not here.
+    -->
+    <style name="Theme.GojuAgent" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

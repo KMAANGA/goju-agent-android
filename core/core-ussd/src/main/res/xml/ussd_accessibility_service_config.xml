@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Deliberately leaves `android:packageNames` unset — DialerPackageRegistry filters by
+    package at runtime instead, so the allowlist can grow without shipping a new APK.
+    `canRetrieveWindowContent` is what lets the service read the USSD dialog's text at all.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagRetrieveInteractiveWindows|flagReportViewIds"
+    android:canRetrieveWindowContent="true"
+    android:notificationTimeout="100"
+    android:description="@string/ussd_accessibility_service_description"/>
