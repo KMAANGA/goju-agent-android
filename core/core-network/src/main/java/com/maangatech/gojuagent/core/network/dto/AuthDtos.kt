@@ -26,8 +26,8 @@ data class AgentProfileDto(
     @Json(name = "name") val name: String,
     @Json(name = "email") val email: String,
     @Json(name = "branch_id") val branchId: Long,
-    @Json(name = "branch_name") val branchName: String,
-    @Json(name = "tenant_name") val tenantName: String,
+    @Json(name = "branch_name") val branchName: String?,
+    @Json(name = "tenant_name") val tenantName: String?,
 )
 
 @JsonClass(generateAdapter = true)

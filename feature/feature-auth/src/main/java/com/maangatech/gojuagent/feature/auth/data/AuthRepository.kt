@@ -16,8 +16,8 @@ data class AgentProfile(
     val id: Long,
     val name: String,
     val email: String,
-    val branchName: String,
-    val tenantName: String,
+    val branchName: String?,
+    val tenantName: String?,
 )
 
 sealed class LoginOutcome {
