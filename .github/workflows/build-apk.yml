@@ -28,14 +28,24 @@ jobs:
         with:
           gradle-version: 8.7
 
-      - name: Build development debug APK
-        run: gradle assembleDevelopmentDebug --no-daemon --stacktrace
+      # Builds both flavors in one run: development points at
+      # https://dev.gojucloud.maangatech.com/ (likely not deployed), production points at
+      # the real https://gojucloud.maangatech.com/ — see app/build.gradle.kts.
+      - name: Build debug APKs (development + production)
+        run: gradle assembleDevelopmentDebug assembleProductionDebug --no-daemon --stacktrace
 
-      - name: Upload APK
+      - name: Upload development APK
         uses: actions/upload-artifact@v4
         with:
           name: goju-agent-development-debug
           path: app/build/outputs/apk/development/debug/*.apk
+          if-no-files-found: error
+
+      - name: Upload production APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: goju-agent-production-debug
+          path: app/build/outputs/apk/production/debug/*.apk
           if-no-files-found: error
 
   unit-tests:
