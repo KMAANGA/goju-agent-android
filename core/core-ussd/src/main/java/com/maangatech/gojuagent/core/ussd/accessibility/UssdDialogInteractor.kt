@@ -66,7 +66,7 @@ object UssdDialogInteractor {
     fun cancelDialog(root: AccessibilityNodeInfo): Boolean =
         findCancelButton(root)?.performAction(AccessibilityNodeInfo.ACTION_CLICK) ?: false
 
-    private inline fun findFirst(
+    private fun findFirst(
         node: AccessibilityNodeInfo,
         predicate: (AccessibilityNodeInfo) -> Boolean,
     ): AccessibilityNodeInfo? {

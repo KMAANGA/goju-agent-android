@@ -29,6 +29,10 @@ object WorkflowStepMatcher {
         InputSource.FORM_FIELD -> step.inputFieldKey
             ?.let { key -> formValues[key] ?: priorCaptures[key] }
         InputSource.NONE -> null
+        // WorkflowSessionEngine.onDialogText() intercepts SECURE_PROMPT steps before ever
+        // calling this — a PIN must never be resolved from formValues/priorCaptures. Null
+        // here is unreachable in practice, kept only so this `when` stays exhaustive.
+        InputSource.SECURE_PROMPT -> null
     }
 
     /** Extracts regex group [groupIndex] from [dialogText] using [step]'s pattern, if present. */
