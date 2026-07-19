@@ -35,7 +35,7 @@ object DatabaseModule {
 
         return Room.databaseBuilder(context, GojuAgentDatabase::class.java, GojuAgentDatabase.DATABASE_NAME)
             .openHelperFactory(factory)
-            .fallbackToDestructiveMigrationOnDowngrade(true)
+            .fallbackToDestructiveMigrationOnDowngrade()
             .build()
     }
 
